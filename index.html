@@ -56,7 +56,9 @@
   {
     --background: black;
     --image: url('platelet1.png');
-    --background-position: -100px -320px;
+    /* 110 x 219 of 500 x 607 */
+    /* .22 x .438 relative to width */
+    --background-position: -11vw -42vw;
     --opacity: .7;
     --color: rgba(255,255,255,.7);
     color: white;
@@ -67,6 +69,7 @@
     border: none;
     height: 1rem;
     animation: var(--duration, 5s) linear infinite textSlide;
+    animation: var(--duration, 5s) linear infinite textSlide, 2s infinite alternate backgroundSlide;
     line-height: 1;
     overflow-y: hidden;
   }
@@ -74,6 +77,53 @@
   {
     color: black;
     font-weight: bold;
+  }
+  @keyframes backgroundSlide
+  {
+    0%
+    {
+      --background-position: -11vw -44vw;
+    }
+    10%
+    {
+      --background-position: -11vw -43.6vw;
+    }
+    20%
+    {
+      --background-position: -11vw -43.2vw;
+    }
+    30%
+    {
+      --background-position: -11vw -42.8vw;
+    }
+    40%
+    {
+      --background-position: -11vw -42.4vw;
+    }
+    50%
+    {
+      --background-position: -11vw -42vw;
+    }
+    60%
+    {
+      --background-position: -11vw -41.6vw;
+    }
+    70%
+    {
+      --background-position: -11vw -41.2vw;
+    }
+    80%
+    {
+      --background-position: -11vw -40.8vw;
+    }
+    90%
+    {
+      --background-position: -11vw -40.4vw;
+    }
+    100%
+    {
+      --background-position: -11vw -40vw;
+    }
   }
   @keyframes textSlide
   {
@@ -151,15 +201,15 @@
   }
   .row._2 > div
   {
-    width: 20vw;
-    height: 20vw;
+    width: 18.8vw;
+    height: 18.8vw;
     max-width: calc(24vh - 1vw);
     max-height: calc(24vh - 1vw);
     margin-left: 1vw;
   }
-  .row._2 > div:first-child
+  .row._2 > div:last-child
   {
-    margin-left: initial;
+    margin-right: 1vw;
   }
   .switch
   {
