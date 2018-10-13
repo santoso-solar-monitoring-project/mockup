@@ -19,14 +19,15 @@
   {
     margin: 0;
   }
-  div
+  div,
+  .colored
   {
     position: absolute;
     border: var(--border, 1px solid red);
   }
   div:before
   {
-    content: attr(data-index);
+    content: attr(data-value);
     text-shadow: 0 0 10px black;
     position: absolute;
     width: 100%;
@@ -74,15 +75,20 @@
     height: calc(1rem + 2px); /* for border */
     border: none;
     height: 1rem;
-    animation: var(--duration, 5s) linear infinite textSlide;
-    animation: var(--duration, 5s) linear infinite textSlide, 2s infinite alternate backgroundSlide;
+    animation: var(--duration, 5s) linear infinite tickerSlide, 2s infinite alternate backgroundSlide;
+    animation: 2s infinite alternate backgroundSlide;
     line-height: 1;
-    overflow-y: hidden;
+    overflow: hidden;
   }
   .ticker:hover
   {
     color: black;
     font-weight: bold;
+  }
+  .ticker > span
+  {
+    display: inline-block;
+    animation: var(--duration, 5s) linear infinite tickerSlide;
   }
   @keyframes backgroundSlide
   {
@@ -131,19 +137,15 @@
       --background-position: -11vw -40vw;
     }
   }
-  @keyframes textSlide
+  @keyframes tickerSlide
   {
     0%
     {
-      text-indent: -150px;
-      white-space: nowrap;
-      overflow-x: hidden;
+      transform: translateX(-100%);
     }
     100%
     {
-      text-indent: 100%;
-      white-space: nowrap;
-      overflow-x: hidden;
+      transform: translateX(100vw);
     }
   }
   span
@@ -172,6 +174,7 @@
     --image: url('platelet3.png');
     height: 35vh;
     width: 83vw;
+    max-width: calc(100vw - 22vh);
   }
   .row._1
   {
@@ -239,26 +242,76 @@
     margin-top: 2px;
     margin-right: -2px;
   }
+  img[src='arrow.svg']
+  {
+    --alpha: .25;
+    position: fixed;
+    left: 5.5vh;
+    top: 50%;
+    width: 10vh;
+    height: 10vh;
+    border: var(--border, 1px solid red);
+    border-radius: 50%;
+    padding: 1vh;
+    padding-right: 2vh;
+    transform: translate(-50%, -50%) scale(.7);
+    /*background-color: rgba(0,255,255, .25);*/
+    background-color: rgba(0,255,255, var(--alpha));
+    opacity: .25;
+  }
+  img[src='arrow.svg'].right
+  {
+    left: calc(100vw - 5.5vh);
+    transform: translate(-50%, -50%) rotate(180deg) scale(.7);
+  }
+  img[src='arrow.svg']:hover
+  {
+    --alpha: .83;
+    opacity: .83;
+  }
+  .page
+  {
+    /*--background: purple;*/
+    --image: none;
+    border: none;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+  }
 </style>
 <body>
-  <div class='ticker' data-index='[1]'><span>dumby text here</span></div>
-  <div class='row _1'>
-    <div class='plot circle-gauge' data-index='[2]'></div>
-    <div class='plot primary' data-index='[3]'></div>
+  <div class='page main'>
+    <div class='ticker' data-value='[1]'><span>dumby text here</span></div>
+    <div class='row _1'>
+      <div class='plot circle-gauge' data-value='[2]'></div>
+      <div class='plot primary' data-value='[3]'></div>
+      <a href='platelet1.png'>
+        <img src='arrow.svg' class='left colored' data-value=''>
+      </a>
+      <a href='platelet2.png'>
+        <img src='arrow.svg' class='right colored' data-value=''>
+      </a>
+    </div>
+    <div class='row _2'>
+      <div class='plot secondary' data-value='[4]'></div>
+      <div class='plot secondary' data-value='[5]'></div>
+      <div class='plot secondary' data-value='[6]'></div>
+      <div class='plot secondary' data-value='[7]'></div>
+      <div class='plot secondary' data-value='[8]'></div>
+    </div>
+    <div class='switch'>
+      <!-- <input type='checkbox' checked> -->
+      <input type='checkbox'>
+      <span>Borders</span>
+    </div>
   </div>
-  <div class='row _2'>
-    <div class='plot secondary' data-index='[4]'></div>
-    <div class='plot secondary' data-index='[5]'></div>
-    <div class='plot secondary' data-index='[6]'></div>
-    <div class='plot secondary' data-index='[7]'></div>
-    <div class='plot secondary' data-index='[8]'></div>
+  <!-- <div class='page background'>
+    background
   </div>
-    <!-- Borders -->
-  <div class='switch'>
-    <input type='checkbox'>
-    <span>Borders</span>
-  </div>
-  <!-- <div class='switch'>Borders</div> -->
+  <div class='page data'>
+    data
+  </div> -->
   <script>
     (()=>
     {
