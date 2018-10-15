@@ -154,6 +154,28 @@
     padding-left: .3rem;
     padding-right: .3rem;
   }
+  .weather
+  {
+    --background: purple;
+    width: 13vh;
+    height: 13vh;
+    max-width: 18vh;
+    max-height: 18vh;
+    left: 2vh;
+    top: calc(1rem + 2vh);
+    z-index: 10;
+  }
+  .model
+  {
+    --background: turquoise;
+    width: 16vh;
+    height: 16vh;
+    max-width: 20vh;
+    max-height: 20vh;
+    right: 2vh;
+    top: calc(1rem + 2vh);
+    z-index: 10;
+  }
   .plot
   {
   }
@@ -161,11 +183,13 @@
   {
     --background: green;
     --image: url('platelet2.png');
-    height: 18vh;
-    width: 18vh;
-    max-width: 24vh;
-    max-height: 24vh;
-    margin-bottom: 2vh;
+    --dim: 24vh;
+    --sep: 4vh;
+    width: var(--dim);
+    height: var(--dim);
+    max-width: calc(1.5*var(--dim));
+    max-height: calc(1.5*var(--dim));
+    margin-bottom: var(--sep);
   }
   .primary
   {
@@ -175,6 +199,8 @@
     height: 35vh;
     width: 83vw;
     max-width: calc(100vw - 22vh);
+    --sep: 4vh;
+    margin-bottom: var(--sep);
   }
   .row._1
   {
@@ -182,6 +208,7 @@
     bottom: 25vh;
     height: calc(75vh - 1rem);
     flex-direction: column;
+    justify-content: flex-end;
   }
   .secondary
   {
@@ -210,15 +237,16 @@
   }
   .row._2 > div
   {
-    width: 18.8vw;
-    height: 18.8vw;
-    max-width: calc(24vh - 1vw);
-    max-height: calc(24vh - 1vw);
-    margin-left: 1vw;
+    --separation: 4vh;
+    width: calc(100vw - 6*var(--separation));
+    height: calc(100vw - 6*var(--separation));
+    max-width: calc(24vh - var(--separation));
+    max-height: calc(24vh - var(--separation));
+    margin-left: var(--separation);
   }
   .row._2 > div:last-child
   {
-    margin-right: 1vw;
+    margin-right: var(--separation);
   }
   .switch
   {
@@ -226,7 +254,7 @@
     position: absolute;
     left: 0;
     bottom: 25vh;
-    height: calc(1.5rem + 2px);
+    height: calc(1rem + 2px);
     display: flex;
     justify-content: right;
     align-items: center;
@@ -240,7 +268,6 @@
     margin: 0;
     box-shadow: none;
     margin-top: 2px;
-    margin-right: -2px;
   }
   img[src='arrow.svg']
   {
@@ -271,9 +298,6 @@
   }
   .page
   {
-    /*--background: purple;*/
-    --image: none;
-    border: none;
     width: 100%;
     height: 100%;
     left: 0;
@@ -281,11 +305,13 @@
   }
 </style>
 <body>
-  <div class='page main'>
+  <section class='page main'>
     <div class='ticker' data-value='[1]'><span>dumby text here</span></div>
+    <div class='weather' data-value='[2]'></div>
+    <div class='model' data-value='[3]'></div>
     <div class='row _1'>
-      <div class='plot circle-gauge' data-value='[2]'></div>
-      <div class='plot primary' data-value='[3]'></div>
+      <div class='plot circle-gauge' data-value='[4]'></div>
+      <div class='plot primary' data-value='[5]'></div>
       <a href='platelet1.png'>
         <img src='arrow.svg' class='left colored' data-value=''>
       </a>
@@ -294,24 +320,24 @@
       </a>
     </div>
     <div class='row _2'>
-      <div class='plot secondary' data-value='[4]'></div>
-      <div class='plot secondary' data-value='[5]'></div>
       <div class='plot secondary' data-value='[6]'></div>
       <div class='plot secondary' data-value='[7]'></div>
       <div class='plot secondary' data-value='[8]'></div>
+      <div class='plot secondary' data-value='[9]'></div>
+      <div class='plot secondary' data-value='[10]'></div>
     </div>
     <div class='switch'>
       <!-- <input type='checkbox' checked> -->
       <input type='checkbox'>
       <span>Borders</span>
     </div>
-  </div>
-  <!-- <div class='page background'>
+  </section>
+  <!-- <section class='page background'>
     background
-  </div>
-  <div class='page data'>
+  </section>
+  <section class='page data'>
     data
-  </div> -->
+  </section> -->
   <script>
     (()=>
     {
