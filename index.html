@@ -3,9 +3,13 @@
 <head>
   <title>Main [Mock]</title>
 </head>
+<script crossorigin src='https://unpkg.com/react@16/umd/react.development.js'></script>
+<script crossorigin src='https://unpkg.com/react-dom@16/umd/react-dom.development.js'></script>
+<script src='https://unpkg.com/babel-standalone@6/babel.min.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
 <script src="https://playground.abysscorp.org/chartjs/livecharts/dist/Chart.min.js"></script>
-<script src = "graph.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="graph.js"></script>
 <style>
   *
   {
@@ -318,7 +322,7 @@
 <body>
   <section class='page main'>
     <div class='ticker' data-value='[1]'><span>dumby text here</span></div>
-    <div class='weather' data-value='[2]'></div>
+    <div id='app' class='weather' data-value='[2]'></div>
     <div class='model' data-value='[3]'></div>
     <div class='row _1'>
       <div class='plot circle-gauge' data-value='[4]'></div>
@@ -429,5 +433,6 @@
       elem.addEventListener ('click', toggleHoverBackgrounds);
     })();
   </script>
+  <script type='text/babel' src='app.js'></script>
 </body>
 </html>
