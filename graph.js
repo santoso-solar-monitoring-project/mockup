@@ -102,7 +102,7 @@ function advance() {
   }, speed);
 }
 
-window.onload = function() {
+window.addEventListener ('DOMContentLoaded', function() {
   initialize();
   advance();
-};
+});
