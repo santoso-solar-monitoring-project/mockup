@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html style='--border:none'>
+<head>
+  <title>Main [Mock]</title>
+</head>
+<!-- <script crossorigin src='https://unpkg.com/react@16/umd/react.development.js'></script> -->
+<!-- <script crossorigin src='https://unpkg.com/react-dom@16/umd/react-dom.development.js'></script> -->
+<!-- <script src='https://unpkg.com/babel-standalone@6/babel.min.js'></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+<script src="https://playground.abysscorp.org/chartjs/livecharts/dist/Chart.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="doughnut.js"></script>
+<script src="graph.js"></script>
+<link rel='stylesheet' type='text/css' href='styles.css'>
+<body>
+  <section class='page main'>
+    <div class='ticker' data-value='[1]'><span>dumby text here</span></div>
+    <div id='app' class='weather' data-value='[2]'></div>
+    <div class='model' data-value='[3]'></div>
+    <div class='row _1'>
+      <div class='plot circle-gauge' data-value='[4]'>
+        <canvas id="chart-area"></canvas>
+      </div>
+      <div class='plot primary' data-value='[5]'>
+        <canvas id="chart0" style="width:512px;height:320px"></canvas>
+      </div>
+      <a href='platelet1.png'>
+        <img src='arrow.svg' class='left colored' data-value=''>
+      </a>
+      <a href='platelet2.png'>
+        <img src='arrow.svg' class='right colored' data-value=''>
+      </a>
+    </div>
+    <div class='row _2'>
+      <div class='plot secondary' data-value='[6]'></div>
+      <div class='plot secondary' data-value='[7]'></div>
+      <div class='plot secondary' data-value='[8]'></div>
+      <div class='plot secondary' data-value='[9]'></div>
+      <div class='plot secondary' data-value='[10]'></div>
+    </div>
+    <div id='borders-switch' class='switch'>
+      <!-- <input type='checkbox' checked> -->
+      <input type='checkbox'>
+      <span>Borders</span>
+    </div>
+    <div id='hover-switch' class='switch'>
+      <!-- <input type='checkbox' checked> -->
+      <input type='checkbox'>
+      <span>Backgrounds</span>
+    </div>
+  </section>
+  <!-- <section class='page background'>
+    background
+  </section>
+  <section class='page data'>
+    data
+  </section> -->
+  <script>
+    (()=>
+    {
+      /*
+        Match scroll duration of ticker to window size.
+      */
+      let ready = true;
+      const elem = document.querySelector ('.ticker');
+      const update = () =>
+      {
+        const screen_width = document.body.getBoundingClientRect ().width;
+        const duration = screen_width / (1000 / 9);
+        elem.style.setProperty ('--duration', `${duration}s`);
+        console.log ({duration})
+        ready = true;
+      };
+      const setDuration = () =>
+      {
+        if (!ready)
+          return;
+        ready = false;
+        requestAnimationFrame (update);
+      };
+      setDuration ();
+      window.addEventListener ('resize', setDuration);
+    })();
+    (()=>
+    {
+      /*
+        Show/hide borders on all elements.
+      */
+      const root = document.querySelector (':root');
+      const elem = document.querySelector ('#borders-switch > input');
+      const border = '1px solid red';
+      const toggleBorders = () =>
+      {
+        if (elem.checked)
+          root.style.setProperty ('--border', border);
+        else
+          root.style.setProperty ('--border', 'none');
+        console.log ({borders: elem.checked})
+      };
+      toggleBorders ();
+      elem.addEventListener ('click', toggleBorders);
+    })();
+    (()=>
+    {
+      /*
+        Enable/disable platelets on hover.
+      */
+      const sheet = document.styleSheets[0];
+      const rules = sheet.cssRules;
+      const elem = document.querySelector ('#hover-switch > input');
+      const rule = 'div:hover:before {--image: rgba(0,0,255,.38)}';
+      let last_index;
+      const toggleHoverBackgrounds = () =>
+      {
+        if (elem.checked)
+        {
+          if (last_index != undefined)
+            last_index = sheet.deleteRule (last_index);
+        }
+        else
+        {
+          if (last_index == undefined)
+            last_index = sheet.insertRule (rule, rules.length);
+        }
+        console.log ({hover: elem.checked})
+      };
+      toggleHoverBackgrounds ();
+      elem.addEventListener ('click', toggleHoverBackgrounds);
+    })();
+  </script>
+  <!-- <script type='text/babel' src='app.js'></script> -->
+</body>
+</html>

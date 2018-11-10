@@ -1,0 +1,307 @@
+*
+{
+  box-sizing: border-box;
+}
+:root
+{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  font-family: 'Ubuntu Mono', Calibri, Arial;
+}
+body
+{
+  margin: 0;
+}
+div,
+.colored
+{
+  position: absolute;
+  border: var(--border, 1px solid red);
+}
+div:before
+{
+  content: attr(data-value);
+  text-shadow: 0 0 10px black;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  opacity: var(--opacity, .25);
+  background: var(--background);
+  color: var(--color, white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: var(--animation, none);
+  text-indent: var(--text-indent, 0);
+  line-height: calc(1rem + 2px);
+  z-index: -1;
+}
+div:hover:before
+{
+  text-shadow: 0 0 10px white;
+  background: var(--image, blue);
+  background-size: var(--background-size, cover);
+  background-position: var(--background-position, initial);
+  color: black;
+  font-weight: bold;
+  opacity: var(--hover-opacity, .38);
+}
+div:hover > div:hover:before
+{
+  opacity: .83;
+}
+.ticker
+{
+  --background: black;
+  --image: url('platelet1.png');
+  /* 110 x 219 of 500 x 607 */
+  /* .22 x .438 relative to width */
+  --background-position: -11vw -42vw;
+  --opacity: .7;
+  --hover-opacity: .83;
+  color: white;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(1rem + 2px); /* for border */
+  border: none;
+  height: 1rem;
+  animation: var(--duration, 5s) linear infinite tickerSlide, 2s infinite alternate backgroundSlide;
+  animation: 2s infinite alternate backgroundSlide;
+  line-height: 1;
+  overflow: hidden;
+}
+.ticker:hover
+{
+  color: black;
+  font-weight: bold;
+}
+.ticker > span
+{
+  display: inline-block;
+  animation: var(--duration, 5s) linear infinite tickerSlide;
+}
+@keyframes backgroundSlide
+{
+  0%
+  {
+    --background-position: -11vw -44vw;
+  }
+  10%
+  {
+    --background-position: -11vw -43.6vw;
+  }
+  20%
+  {
+    --background-position: -11vw -43.2vw;
+  }
+  30%
+  {
+    --background-position: -11vw -42.8vw;
+  }
+  40%
+  {
+    --background-position: -11vw -42.4vw;
+  }
+  50%
+  {
+    --background-position: -11vw -42vw;
+  }
+  60%
+  {
+    --background-position: -11vw -41.6vw;
+  }
+  70%
+  {
+    --background-position: -11vw -41.2vw;
+  }
+  80%
+  {
+    --background-position: -11vw -40.8vw;
+  }
+  90%
+  {
+    --background-position: -11vw -40.4vw;
+  }
+  100%
+  {
+    --background-position: -11vw -40vw;
+  }
+}
+@keyframes tickerSlide
+{
+  0%
+  {
+    transform: translateX(-100%);
+  }
+  100%
+  {
+    transform: translateX(100vw);
+  }
+}
+span
+{
+  background: rgba(255,255,255,.16);
+  padding-left: .3rem;
+  padding-right: .3rem;
+}
+.weather
+{
+  --background: purple;
+  width: 13vh;
+  height: 13vh;
+  max-width: 18vh;
+  max-height: 18vh;
+  left: 2vh;
+  top: calc(1rem + 2vh);
+  z-index: 10;
+}
+.model
+{
+  --background: turquoise;
+  width: 16vh;
+  height: 16vh;
+  max-width: 20vh;
+  max-height: 20vh;
+  right: 2vh;
+  top: calc(1rem + 2vh);
+  z-index: 10;
+}
+.plot
+{
+}
+.circle-gauge
+{
+  --background: green;
+  --image: url('platelet2.png');
+  --dim: 24vh;
+  --sep: 4vh;
+  width: var(--dim);
+  height: var(--dim);
+  max-width: calc(1.5*var(--dim));
+  max-height: calc(1.5*var(--dim));
+  margin-bottom: var(--sep);
+}
+.primary
+{
+  --background: red;
+  --background-position: center;
+  --image: url('platelet3.png');
+  height: 35vh;
+  width: 83vw;
+  max-width: calc(100vw - 22vh);
+  --sep: 4vh;
+  margin-bottom: var(--sep);
+}
+.row._1
+{
+  top: 1rem;
+  bottom: 25vh;
+  height: calc(75vh - 1rem);
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.secondary
+{
+  --background: blue;
+  --background-position: top;
+  --image: url('platelet4.png');
+}
+.row
+{
+  --image: url('platelet5.png');
+  --background: yellow;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.row > div
+{
+  position: relative;
+}
+.row._2
+{
+  height: 25vh;
+  left: 0;
+  bottom: 0;
+}
+.row._2 > div
+{
+  --separation: 4vh;
+  width: calc(100vw - 6*var(--separation));
+  height: calc(100vw - 6*var(--separation));
+  max-width: calc(24vh - var(--separation));
+  max-height: calc(24vh - var(--separation));
+  margin-left: var(--separation);
+}
+.row._2 > div:last-child
+{
+  margin-right: var(--separation);
+}
+.switch
+{
+  --image: none;
+  position: absolute;
+  height: calc(1rem + 2px);
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  margin-bottom: 1vh;
+  margin-left: 1vh;
+}
+#borders-switch
+{
+  left: 0;
+  bottom: 25vh;
+}
+#hover-switch
+{
+  left: 0;
+  bottom: calc(25vh + 1rem + 2px + 1vh);
+}
+input[type=checkbox]
+{
+  width: calc(1.5rem + 2px);
+  height: calc(1.5rem + 2px);
+  margin: 0;
+  box-shadow: none;
+  margin-top: 2px;
+}
+img[src='arrow.svg']
+{
+  --alpha: .25;
+  position: fixed;
+  left: 5.5vh;
+  top: 50%;
+  width: 10vh;
+  height: 10vh;
+  border: var(--border, 1px solid red);
+  border-radius: 50%;
+  padding: 1vh;
+  padding-right: 2vh;
+  transform: translate(-50%, -50%) scale(.7);
+  /*background-color: rgba(0,255,255, .25);*/
+  background-color: rgba(0,255,255, var(--alpha));
+  opacity: .25;
+}
+img[src='arrow.svg'].right
+{
+  left: calc(100vw - 5.5vh);
+  transform: translate(-50%, -50%) rotate(180deg) scale(.7);
+}
+img[src='arrow.svg']:hover
+{
+  --alpha: .83;
+  opacity: .83;
+}
+.page
+{
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
